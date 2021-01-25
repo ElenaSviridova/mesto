@@ -8,5 +8,7 @@
 @media all and (max-width: 650px) {
     .profile {
         flex-direction: column;
+        margin-bottom: 36px;
+        margin-top: 38.25px;
     }
 }

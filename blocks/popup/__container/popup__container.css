@@ -4,7 +4,7 @@
     width: 430px;
     height: 330px;
     position: fixed;
-    top: 27%;
+    top: 24%;
     left: 50%;
     margin-left: -215px;
 }
@@ -12,6 +12,7 @@
 @media all and (max-width: 650px) {
     .popup__container {
        width: 282px;
-       margin-left: -141px;
+       margin-left: -145px;
+       top: 15%;
     }
 }

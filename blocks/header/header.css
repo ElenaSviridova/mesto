@@ -14,5 +14,6 @@
 @media all and (max-width: 450px) {
     .header {
         width: 88%;
+        padding: 28px 0 31.6px;
     }
 }
