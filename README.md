@@ -11,7 +11,7 @@
 
 **JavaScript**
  В данном проекте использовались язык программтрования JavaScript.
-* [Ссылка на GitHub Pages](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+* [Ссылка на GitHub Pages]https://elenasviridova.github.io/mesto/)
 
 **Адаптивность**
 
