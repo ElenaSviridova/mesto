@@ -1,0 +1,13 @@
+.element__like {
+    max-width: 22px;
+    max-height: 19px;
+}
+
+.element__like:hover {
+    opacity: 50%;
+}
+
+.element__like:active {
+    background-image: url(../../../images/black-like.png);
+    opacity: 100%;
+}

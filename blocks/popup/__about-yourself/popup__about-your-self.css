@@ -1,0 +1,9 @@
+.popup__about-yourself {
+    width: 83.3%;
+    min-height: 27px;
+    margin: 0 8.37% 48px;
+    padding: 0;
+    display: block;
+    border:none;
+    border-bottom: rgba(0, 0, 0, 0.2) solid 1px;
+}

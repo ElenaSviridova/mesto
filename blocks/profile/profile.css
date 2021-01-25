@@ -1,0 +1,12 @@
+.profile {
+    max-width: 880px;
+    margin: 36.25px auto 47.25px;
+    display: flex;
+    align-items: center;  
+}
+
+@media all and (max-width: 650px) {
+    .profile {
+        flex-direction: column;
+    }
+}

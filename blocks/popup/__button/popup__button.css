@@ -1,0 +1,19 @@
+.popup__button {
+    width: 83.3%;
+    min-height: 50px;
+    margin: 0 8.37% 8.6%;
+    padding: 0;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 2px;
+    font-size: 18px;
+    font-weight: normal;
+    font-family: 'Inter';
+    line-height: 22px;
+    text-align: center;
+}
+
+.popup__button:hover {
+    opacity: 80%;
+}

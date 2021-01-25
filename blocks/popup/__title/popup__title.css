@@ -1,0 +1,9 @@
+.popup__title {
+    max-width: 358px;
+    margin: 2.42% 8.37% 0;
+    font-size: 24px;
+    font-weight: 900;
+    font-family: 'Inter';
+    line-height: 29px;
+    text-align: left;
+}
