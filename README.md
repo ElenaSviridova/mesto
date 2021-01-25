@@ -11,7 +11,7 @@
 
 **JavaScript**
  В данном проекте использовались язык программтрования JavaScript.
-* [Ссылка на GitHub Pages]https://elenasviridova.github.io/mesto/)
+* [Ссылка на GitHub Pages](https://elenasviridova.github.io/mesto/)
 
 **Адаптивность**
 
