@@ -6,4 +6,8 @@
     display: block;
     border:none;
     border-bottom: rgba(0, 0, 0, 0.2) solid 1px;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: 'Inter';
+    line-height: 17px;
 }
