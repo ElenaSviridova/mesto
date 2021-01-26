@@ -12,4 +12,5 @@
 
 .popup__close-icon:hover {
     opacity: 60%;
+    cursor: pointer;
 }
