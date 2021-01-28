@@ -1,9 +1,7 @@
 .profile__edit-button {
-    position: absolute;
-    left: 92.3%;
-    top: 17.65%;
     margin: 0;
     padding: 0;
+    outline: none;
     width: 24px;
     height: 24px;
     background-color:black;
@@ -12,8 +10,7 @@
 
 @media all and (max-width: 990px) {
     .profile__edit-button {
-        left: 98%;
-        top: 12%;
+        
     }
 }
 
@@ -21,12 +18,11 @@
     .profile__edit-button {
        width: 18px;
        height: 18px;
-       left: 81%;
-       top: 25%;
+      
     }
 }
 
 .profile__edit-button:hover {
-    opacity: 70%;
+    opacity: 60%;
     cursor: pointer;
 }

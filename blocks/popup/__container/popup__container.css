@@ -2,17 +2,17 @@
     background-color: white;
     border-radius: 10px;
     width: 430px;
-    height: 330px;
     position: fixed;
-    top: 24%;
+    display: flex;
+    flex-direction: column;
+    top: 22%;
     left: 50%;
-    margin-left: -215px;
+    transform: translateX(-50%);
 }
 
 @media all and (max-width: 650px) {
     .popup__container {
        width: 282px;
-       margin-left: -145px;
        top: 15%;
     }
 }

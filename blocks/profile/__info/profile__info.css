@@ -1,12 +1,17 @@
 .profile__info {
-    display: flex;
-    position: relative;
-    width: 336px;
-    flex-direction: column;
+    display: grid;
+    width: 100%;
+    justify-content: start;
+    grid-template-columns: minmax(auto, auto) minmax(min-content, max-content);
+    grid-template-rows: auto;
+    align-items: baseline;
+    column-gap: 18px;
+    box-sizing: border-box;
 }
 
-@media all and (max-width: 650px) {
+@media all and (max-width: 1024px) {
     .profile__info {
-        flex-direction: column;
-    }
+        column-gap: 10px;
+        margin: 0 auto;
+        justify-content: center;
 }

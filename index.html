@@ -8,15 +8,6 @@
 </head>
 <body class="body">
     <div class="page">
-        <div class="popup">
-            <form class="popup__container">
-                <img src="./images/Close-Icon.svg" alt="картинка закрытия окна" class="popup__close-icon">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" class="popup__name">
-                <input type="text" class="popup__about-yourself">
-                <button class="popup__button">Сохранить</button>
-            </form>
-        </div>
         <header class="header">
             <img src="./images/logo.svg" alt="Картинка логотипа" class="header__logo">
         </header>
@@ -27,61 +18,83 @@
                     </div>
                     <div class="profile__info">
                       <h1 class="profile__title">Жак-Ив Кусто</h1>
-                      <button class="profile__edit-button">
+                      <button type="button" class="profile__edit-button">
                         <img src="./images/edit-button.svg" alt="картинка добавить текст" class="profile__edit-button-image">
                       </button>
                       <p class="profile__subtitle">Исследователь океана</p>
-                      
                     </div> 
-                    <button class="profile__add-button">
+                    <button type="button" class="profile__add-button">
                         <img src="./images/plus.svg" alt="Картинка добавить" class="profile__add-button-image">
                     </button>       
             </section>
             <section class="elements">
-                <div class="element">
+                <article class="element">
                     <img src="./images/karachaevsk.jpg" alt="картинка Карачаевск" class="element__image">
                     <div class="element__caption">
                         <h2 class="element__title">Карачаевск</h2>
-                        <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        <button type="button" class="element__button">
+                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        </button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     <img src="./images/elbrus.png" alt="картинка Гора Эльбрус" class="element__image">
                     <div class="element__caption">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        <button type="button" class="element__button">
+                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        </button>
                     </div>  
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     <img src="./images/dombay.png" alt="картинка Домбай" class="element__image">
                     <div class="element__caption">
                         <h2 class="element__title">Домбай</h2>
-                        <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        <button type="button" class="element__button">
+                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        </button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     <img src="./images/elbrus.png" alt="картинка Гора Эльбрус" class="element__image">
                     <div class="element__caption">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        <button type="button" class="element__button">
+                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        </button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     <img src="./images/dombay.png" alt="картинка Домбай" class="element__image">
                     <div class="element__caption">
                         <h2 class="element__title">Домбай</h2>
-                        <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        <button type="button" class="element__button">
+                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        </button>
                     </div>
-                </div>
-                <div class="element">
+                </article>
+                <article class="element">
                     <img src="./images/karachaevsk.jpg" alt="картинка Карачаево-Черкессия" class="element__image">
                     <div class="element__caption">
                         <h2 class="element__title">Карачаево-Черкессия</h2>
-                        <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        <button type="button" class="element__button">
+                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
+                        </button>
                     </div>
-                </div>
+                </article>
             </section>
         </main>
+        <div class="popup">
+            <form name="myForm" class="popup__container">
+                <button type="button" class="popup__close-button">
+                    <img src="./images/Close-Icon.svg" alt="картинка закрытия окна" class="popup__close-icon">
+                </button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input name="Author" type="text" class=" popup__input popup__input_name">
+                <input name="Profile" type="text" class=" popup__input popup__input_about-yourself">
+                <button type="submit" class="popup__button">Сохранить</button>
+            </form>
+        </div>
         <footer class="footer">
             <p class="footer__author">&copy;2021 Mesto Russia</p>
         </footer>

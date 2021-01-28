@@ -5,6 +5,9 @@
     line-height: 114%;
     color: white;
     margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media all and (max-width: 1200px) {
@@ -19,7 +22,7 @@
     }
 }
 
-@media all and (max-width: 650px) {
+@media all and (max-width: 1024px) {
     .profile__title {
        text-align: center;
        margin-top: 22.25px;

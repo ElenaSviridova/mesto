@@ -1,14 +1,24 @@
 .profile {
     max-width: 880px;
     margin: 36.25px auto 47.25px;
-    display: flex;
-    align-items: center;  
+    display: grid;
+    grid-template-columns: minmax(min-content, 120px) minmax(min-content, 610px) minmax(min-content, 150px);
+    grid-template-rows: auto;
+    align-items: center;
+    justify-content: start;
+    column-gap: 30px;
 }
 
-@media all and (max-width: 650px) {
+@media all and (max-width: 1024px) {
     .profile {
-        flex-direction: column;
-        margin-bottom: 36px;
-        margin-top: 38.25px;
+        column-gap: 10px;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .profile {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(3, minmax(min-content, 26px));
+        margin: 38.25px auto 36px;
     }
 }

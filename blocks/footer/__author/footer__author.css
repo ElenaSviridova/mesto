@@ -10,5 +10,7 @@
 @media all and (max-width: 650px) {
     .footer__author {
         text-align: left;
+        font-size: 14px;
+        line-height: 17px;
     }
 }

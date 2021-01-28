@@ -1,20 +1,10 @@
 .profile__avatar {
-    width: 168.75px;
-    height: 127.5px;
     background-color: black;
-    margin-left: -22.5px;
-    margin-right: 3.75px;
 }
 
-@media all and (max-width: 900px) {
-    .profile__avatar {
-        margin-left: 0;
-        margin-right: 15px;
-    }
-}
 
-@media all and (max-width: 650px) {
+@media all and (max-width: 1024px) {
     .profile__avatar {
-        margin-left: 0;
+        margin: 0 auto;
     }
 }
