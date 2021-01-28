@@ -20,10 +20,6 @@
 
 @import url(../blocks/popup/__input/popup__input.css);
 
-@import url(../blocks/popup/__input/_name/popup__input_name.css);
-
-@import url(../blocks/popup/__input/_about-yourself/popup__input_about-your-self.css);
-
 @import url(../blocks/popup/__button/popup__button.css);
 
 @import url(../blocks/header/header.css);
