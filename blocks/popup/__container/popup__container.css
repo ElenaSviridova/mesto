@@ -6,7 +6,6 @@
     display: flex;
     flex-direction: column;
     margin: 195px auto;
-    
 }
 
 @media all and (max-width: 650px) {

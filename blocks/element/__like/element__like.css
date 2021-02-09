@@ -1,15 +1,20 @@
 .element__like {
-    max-width: 22px;
-    max-height: 19px;
+    background: url(../../../images/like.svg) center no-repeat;
+    width: 22px;
+    height: 19px;
+    background-size: 100%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: white;
+    padding: 0;
 }
 
 .element__like:hover {
     opacity: 50%;
-    cursor: pointer;
 }
 
-.element__like:active {
-    background-image: url(../../../images/black-like.png);
-    opacity: 100%;
-    cursor: pointer;
+.element__like_active {
+    background: url(../../../images/heart-filled.svg) center no-repeat;
+    opacity: 1;
 }

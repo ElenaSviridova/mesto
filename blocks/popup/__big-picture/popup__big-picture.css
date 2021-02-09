@@ -1,0 +1,6 @@
+.popup__big-picture {
+    max-width: fit-content;
+    max-height: fit-content;
+    position: relative;
+    margin: 90px auto;
+}

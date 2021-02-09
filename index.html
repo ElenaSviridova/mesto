@@ -28,63 +28,9 @@
                     </button>       
             </section>
             <section class="elements">
-                <article class="element">
-                    <img src="./images/karachaevsk.jpg" alt="картинка Карачаевск" class="element__image">
-                    <div class="element__caption">
-                        <h2 class="element__title">Карачаевск</h2>
-                        <button type="button" class="element__button">
-                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
-                        </button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img src="./images/elbrus.png" alt="картинка Гора Эльбрус" class="element__image">
-                    <div class="element__caption">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button type="button" class="element__button">
-                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
-                        </button>
-                    </div>  
-                </article>
-                <article class="element">
-                    <img src="./images/dombay.png" alt="картинка Домбай" class="element__image">
-                    <div class="element__caption">
-                        <h2 class="element__title">Домбай</h2>
-                        <button type="button" class="element__button">
-                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
-                        </button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img src="./images/elbrus.png" alt="картинка Гора Эльбрус" class="element__image">
-                    <div class="element__caption">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button type="button" class="element__button">
-                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
-                        </button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img src="./images/dombay.png" alt="картинка Домбай" class="element__image">
-                    <div class="element__caption">
-                        <h2 class="element__title">Домбай</h2>
-                        <button type="button" class="element__button">
-                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
-                        </button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img src="./images/karachaevsk.jpg" alt="картинка Карачаево-Черкессия" class="element__image">
-                    <div class="element__caption">
-                        <h2 class="element__title">Карачаево-Черкессия</h2>
-                        <button type="button" class="element__button">
-                            <img src="images/like.svg" class="element__like" alt="картинка лайк">
-                        </button>
-                    </div>
-                </article>
             </section>
         </main>
-        <div class="popup">
+        <div class="popup popup_edit">
             <form name="myForm" class="popup__container">
                 <button type="button" class="popup__close-button">
                     <img src="./images/Close-Icon.svg" alt="картинка закрытия окна" class="popup__close-icon">
@@ -95,10 +41,41 @@
                 <button type="submit" class="popup__button">Сохранить</button>
             </form>
         </div>
+        <div class="popup popup_add">
+            <form name="myForm" class="popup__container">
+                <button type="button" class="popup__close-button">
+                    <img src="./images/Close-Icon.svg" alt="картинка закрытия окна" class="popup__close-icon">
+                </button>
+                <h2 class="popup__title">Новое место</h2>
+                <input name="Author" type="text" class=" popup__input popup__input_text_name" placeholder="Название">
+                <input name="Profile" type="text" class=" popup__input popup__input_text_about-yourself" placeholder="Ссылка на картинку">
+                <button type="submit" class="popup__button">Создать</button>
+            </form>
+        </div>
+        <div class="popup popup_image">
+            <div class="popup__big-picture">
+                <img src="/" alt="картинки нет" class="popup__picture">
+                <h2 class="popup__caption"></h2>
+                <button class="popup__close-button">
+                    <img src="./images/Close-Icon.svg" alt="картинка закрытия окна" class="popup__close-icon">
+                </button>
+            </div>
+        </div>
+
         <footer class="footer">
             <p class="footer__author">&copy;2021 Mesto Russia</p>
         </footer>
     </div>
+    <template id="element">
+        <article class="element">
+            <button class="element__delete"></button>
+            <img class="element__image" alt="" src="">
+            <div class="element__caption">
+                <h2 class="element__title"></h2>
+                <button type="button" class="element__like"></button>
+            </div>
+        </article>
+    </template>
     <script src="./scripts/script.js"></script>
 </body>        
 </html>
