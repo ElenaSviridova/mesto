@@ -69,7 +69,7 @@ const initialCards = [
 
         //создаем карточку
         function createCard(cardLink, cardName) {
-          let cardElement = elementTemplate.querySelector('.element').cloneNode(true);
+          const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
           const elementImage = cardElement.querySelector('.element__image');
           const elementText = cardElement.querySelector('.element__title');
           elementImage.src = cardLink;
@@ -113,15 +113,15 @@ closeButtonImage.addEventListener('click', () => {
     togglePopup(popupImage)
 }); 
 
-let formPopupAdd = document.querySelector('.popup_add');
-let formPopupAddContainer = formPopupAdd.querySelector('.popup__container');
-let popupAddCloseIcon = formPopupAddContainer.querySelector('.popup__close-icon');
-let profileAddButton = document.querySelector('.profile__add-button');
-let formAddElement = formPopupAdd.querySelector('.popup__container');
-let nameAddInput = formAddElement.querySelector('.popup__input_text_name');
-let jobAddInput = formAddElement.querySelector('.popup__input_text_about-yourself');
-let elementTitle = elements.querySelector('.element__title');
-let elementImage = elements.querySelector('.element__image');
+const formPopupAdd = document.querySelector('.popup_add');
+const formPopupAddContainer = formPopupAdd.querySelector('.popup__container');
+const popupAddCloseIcon = formPopupAddContainer.querySelector('.popup__close-icon');
+const profileAddButton = document.querySelector('.profile__add-button');
+const formAddElement = formPopupAdd.querySelector('.popup__container');
+const nameAddInput = formAddElement.querySelector('.popup__input_text_name');
+const jobAddInput = formAddElement.querySelector('.popup__input_text_about-yourself');
+const elementTitle = elements.querySelector('.element__title');
+const elementImage = elements.querySelector('.element__image');
 
 function clearInput() {
     nameAddInput.value = '';
