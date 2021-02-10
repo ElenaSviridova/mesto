@@ -1,14 +1,17 @@
-let formPopup = document.querySelector('.popup_edit');
-let formPopupContainer = document.querySelector('.popup__container');
-let popupCloseIcon = formPopupContainer.querySelector('.popup__close-icon');
-let profileInfo = document.querySelector('.profile__info');
-let profileEditButton = profileInfo.querySelector('.profile__edit-button');
-let formElement = document.querySelector('.popup__container');
-let nameInput = formElement.querySelector('.popup__input_text_name');
-let jobInput = formElement.querySelector('.popup__input_text_about-yourself');
-let profileTitle = profileInfo.querySelector('.profile__title');
-let profileSubtitle = profileInfo.querySelector('.profile__subtitle');
-
+const formPopup = document.querySelector('.popup_edit');
+const formPopupContainer = document.querySelector('.popup__container');
+const popupCloseIcon = formPopupContainer.querySelector('.popup__close-icon');
+const profileInfo = document.querySelector('.profile__info');
+const profileEditButton = profileInfo.querySelector('.profile__edit-button');
+const formElement = document.querySelector('.popup__container');
+const nameInput = formElement.querySelector('.popup__input_text_name');
+const jobInput = formElement.querySelector('.popup__input_text_about-yourself');
+const profileTitle = profileInfo.querySelector('.profile__title');
+const profileSubtitle = profileInfo.querySelector('.profile__subtitle');
+const popupImage = document.querySelector('.popup_image'); 
+const closeButtonImage = popupImage.querySelector('.popup__close-button');
+const popupPicture = popupImage.querySelector('.popup__picture');
+const popupCaption = popupImage.querySelector('.popup__caption');
 
 function togglePopup(popup) {
     popup.classList.toggle('popup_opened');   
@@ -67,8 +70,10 @@ const initialCards = [
         //создаем карточку
         function createCard(cardLink, cardName) {
           let cardElement = elementTemplate.querySelector('.element').cloneNode(true);
-          cardElement.querySelector('.element__image').src = cardLink;
-          cardElement.querySelector('.element__title').textContent = cardName;
+          const elementImage = cardElement.querySelector('.element__image');
+          const elementText = cardElement.querySelector('.element__title');
+          elementImage.src = cardLink;
+          elementText.textContent = cardName;
 
           const likeButton = cardElement.querySelector('.element__like');
             //вешаем слушатель на лайк
@@ -76,35 +81,32 @@ const initialCards = [
             const eventTarget = evt.target;
             eventTarget.classList.toggle('element__like_active');
           });
-          elements.prepend(cardElement);
 
-          const deleteButton = document.querySelector('.element__delete');
+          const deleteButton = cardElement.querySelector('.element__delete');
           
           deleteButton.addEventListener('click', function () {
             const listElement = deleteButton.closest('.element');
             listElement.remove();
           }); //Удаление карточки кликом на корзину
 
-          const elementImage = cardElement.querySelector('.element__image');
-          const elementText = cardElement.querySelector('.element__title');
 
           elementImage.addEventListener('click', () => {
-              openPicture(elementImage, elementText);
+              openPicture(cardLink, cardName);
           })//вешаем слушатель накартинку карточки
+          return cardElement;
         };
 
 initialCards.forEach(item => {
-    createCard(item.link, item.name)
+    elements.prepend(createCard(item.link, item.name));
 }); //применяем функцию создания карточек на каждый элемент из массива initialCards
 
-const popupImage = document.querySelector('.popup_image'); 
-const closeButtonImage = popupImage.querySelector('.popup__close-button');
+
 
 function openPicture(image, text) {  
     togglePopup(popupImage);
-    popupImage.querySelector('.popup__picture').src = image.src;
-    popupImage.querySelector('.popup__picture').alt = image.alt;
-    popupImage.querySelector('.popup__caption').textContent = text.textContent;
+    popupPicture.src = image;
+    popupPicture.alt = image;
+    popupCaption.textContent = text;
 }        
 
 closeButtonImage.addEventListener('click', () => {
@@ -128,7 +130,7 @@ function clearInput() {
 
 function addSave (evt) {
     evt.preventDefault();
-    createCard(jobAddInput.value,nameAddInput.value);
+    elements.prepend(createCard(jobAddInput.value,nameAddInput.value));
     togglePopup(formPopupAdd);
     clearInput();
 }
