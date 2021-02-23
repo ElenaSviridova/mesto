@@ -1,9 +1,8 @@
 const formPopup = document.querySelector('.popup_edit');
-const formPopupContainer = document.querySelector('.popup__container');
-const popupCloseIcon = formPopupContainer.querySelector('.popup__close-icon');
 const profileInfo = document.querySelector('.profile__info');
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');
-const formElement = document.querySelector('.popup__container');
+const formElement = formPopup.querySelector('.popup__container');
+const popupCloseIcon = formElement.querySelector('.popup__close-icon');
 const nameInput = formElement.querySelector('.popup__input_text_name');
 const jobInput = formElement.querySelector('.popup__input_text_about-yourself');
 const profileTitle = profileInfo.querySelector('.profile__title');
@@ -14,7 +13,15 @@ const popupPicture = popupImage.querySelector('.popup__picture');
 const popupCaption = popupImage.querySelector('.popup__caption');
 
 function togglePopup(popup) {
-    popup.classList.toggle('popup_opened');   
+    popup.classList.toggle('popup_opened'); 
+    //вешаю слушатели на все попапы, чтобы они закрывались по нажатию на клавишу Esc
+    popupList.forEach ((popup) => {
+      document.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape' && popup.classList.contains('popup_opened')) {
+        togglePopup(popup)
+        }
+      })
+    })  
 }//открываем закрываем попап
 
 function editClick() {
@@ -32,10 +39,21 @@ function editSave (evt) {
 
 profileEditButton.addEventListener('click', () => {
     editClick(formPopup);
+    enableValidation({
+      formSelector: '.popup__container',
+      inputSelector: '.popup__input',
+      submitButtonSelector: '.popup__button',
+      inactiveButtonClass: 'popup__button_disabled',
+      inputErrorClass: 'popup__input_type_error',
+      errorClass: 'popup__error_visible'
+    });
 });
+
+
 popupCloseIcon.addEventListener('click', () => {
     togglePopup(formPopup);
 });
+
 formElement.addEventListener('submit', editSave);
 
 const elements = document.querySelector('.elements');
@@ -114,10 +132,9 @@ closeButtonImage.addEventListener('click', () => {
 }); 
 
 const formPopupAdd = document.querySelector('.popup_add');
-const formPopupAddContainer = formPopupAdd.querySelector('.popup__container');
-const popupAddCloseIcon = formPopupAddContainer.querySelector('.popup__close-icon');
 const profileAddButton = document.querySelector('.profile__add-button');
 const formAddElement = formPopupAdd.querySelector('.popup__container');
+const popupAddCloseIcon = formAddElement.querySelector('.popup__close-icon');
 const nameAddInput = formAddElement.querySelector('.popup__input_text_name');
 const jobAddInput = formAddElement.querySelector('.popup__input_text_about-yourself');
 const elementTitle = elements.querySelector('.element__title');
@@ -137,6 +154,15 @@ function addSave (evt) {
 
 profileAddButton.addEventListener('click', () => {
     togglePopup(formPopupAdd);
+    enableValidation({
+      formSelector: '.popup__container',
+      inputSelector: '.popup__input',
+      submitButtonSelector: '.popup__button',
+      inactiveButtonClass: 'popup__button_disabled',
+      inputErrorClass: 'popup__input_type_error',
+      errorClass: 'popup__error_visible'
+    });
+    
 });//Открываем попап для добавления карточек
 
 
@@ -147,4 +173,14 @@ popupAddCloseIcon.addEventListener('click',  () => {
 
 
 formAddElement.addEventListener('submit', addSave);//Сохраняем данные кликом на кнопку "создать"
+
+
+
+
+
+
+
+
+  
+
 
