@@ -2,33 +2,83 @@ const formPopup = document.querySelector('.popup_edit');
 const profileInfo = document.querySelector('.profile__info');
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');
 const formElement = formPopup.querySelector('.popup__container');
-const popupCloseIcon = formElement.querySelector('.popup__close-icon');
 const nameInput = formElement.querySelector('.popup__input_text_name');
 const jobInput = formElement.querySelector('.popup__input_text_about-yourself');
 const profileTitle = profileInfo.querySelector('.profile__title');
 const profileSubtitle = profileInfo.querySelector('.profile__subtitle');
 const popupImage = document.querySelector('.popup_image'); 
-const closeButtonImage = popupImage.querySelector('.popup__close-button');
 const popupPicture = popupImage.querySelector('.popup__picture');
 const popupCaption = popupImage.querySelector('.popup__caption');
 
 function togglePopup(popup) {
     popup.classList.toggle('popup_opened'); 
-    //вешаю слушатели на все попапы, чтобы они закрывались по нажатию на клавишу Esc
-    popupList.forEach ((popup) => {
-      document.addEventListener('keydown', (evt) => {
-      if (evt.key === 'Escape' && popup.classList.contains('popup_opened')) {
-        togglePopup(popup)
-        }
-      })
-    })  
+    if (popup.classList.contains('popup_opened')) {
+      document.addEventListener('keydown', closeByEscape);
+    }
+    else {
+      document.removeEventListener('keydown', closeByEscape);
+    }
 }//открываем закрываем попап
 
-function editClick() {
+
+//функция закрытия по Esc
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    togglePopup(openedPopup);
+  }
+}
+
+document.addEventListener('keydown', closeByEscape);
+document.removeEventListener('keydown', closeByEscape);
+
+const popups = document.querySelectorAll('.popup');
+
+//устанавливаю обработчики для всех попапов 
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+        overlayClosePopup(evt)
+        if (evt.target.classList.contains('popup_opened')) {
+            togglePopup(popup)
+        }
+        if (evt.target.classList.contains('popup__close-icon')) {
+           togglePopup(popup) 
+        }
+    })
+})
+
+//функция закрывающая попапы по клику на оверлэй
+function overlayClosePopup(evt) {
+  if (evt.target === evt.currentTarget) {
+    evt.preventDefault();
+    togglePopup(evt.target);
+  }
+}
+
+function editClick(popup) {
     nameInput.value = profileTitle.textContent;
     jobInput.value = profileSubtitle.textContent;
-    togglePopup(formPopup);
-}//ставим в поля значения по умолчанию
+    togglePopup(popup);
+    clearErrors(popup);
+}//открываем попап,ставим в поля значения по умолчанию, очищаем от ошибок
+
+const validationConfig = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
+//очищаем попап от ошибок
+function clearErrors(popup) {
+  const inputList = Array.from(popup.querySelectorAll('.popup__input'));
+  const buttonSelector = popup.querySelector('.popup__button');
+  inputList.forEach((inputSelector) => {
+      toggleButtonState(inputList, buttonSelector, validationConfig.inactiveButtonClass);
+      hideInputError(popup, inputSelector, validationConfig.inputErrorClass, validationConfig.errorClass)
+  })
+  }
 
 function editSave (evt) {
     evt.preventDefault();
@@ -39,19 +89,6 @@ function editSave (evt) {
 
 profileEditButton.addEventListener('click', () => {
     editClick(formPopup);
-    enableValidation({
-      formSelector: '.popup__container',
-      inputSelector: '.popup__input',
-      submitButtonSelector: '.popup__button',
-      inactiveButtonClass: 'popup__button_disabled',
-      inputErrorClass: 'popup__input_type_error',
-      errorClass: 'popup__error_visible'
-    });
-});
-
-
-popupCloseIcon.addEventListener('click', () => {
-    togglePopup(formPopup);
 });
 
 formElement.addEventListener('submit', editSave);
@@ -127,14 +164,9 @@ function openPicture(image, text) {
     popupCaption.textContent = text;
 }        
 
-closeButtonImage.addEventListener('click', () => {
-    togglePopup(popupImage)
-}); 
-
 const formPopupAdd = document.querySelector('.popup_add');
 const profileAddButton = document.querySelector('.profile__add-button');
 const formAddElement = formPopupAdd.querySelector('.popup__container');
-const popupAddCloseIcon = formAddElement.querySelector('.popup__close-icon');
 const nameAddInput = formAddElement.querySelector('.popup__input_text_name');
 const jobAddInput = formAddElement.querySelector('.popup__input_text_about-yourself');
 const elementTitle = elements.querySelector('.element__title');
@@ -145,6 +177,12 @@ function clearInput() {
     jobAddInput.value = '';
 }//очищает поля 
 
+function addClick(popup) {
+  togglePopup(popup);
+  clearErrors(popup);
+  clearInput();
+}
+
 function addSave (evt) {
     evt.preventDefault();
     elements.prepend(createCard(jobAddInput.value,nameAddInput.value));
@@ -153,24 +191,8 @@ function addSave (evt) {
 }
 
 profileAddButton.addEventListener('click', () => {
-    togglePopup(formPopupAdd);
-    enableValidation({
-      formSelector: '.popup__container',
-      inputSelector: '.popup__input',
-      submitButtonSelector: '.popup__button',
-      inactiveButtonClass: 'popup__button_disabled',
-      inputErrorClass: 'popup__input_type_error',
-      errorClass: 'popup__error_visible'
-    });
-    
+    addClick(formPopupAdd);
 });//Открываем попап для добавления карточек
-
-
-popupAddCloseIcon.addEventListener('click',  () => {
-    togglePopup(formPopupAdd);
-    clearInput();
-});//Закрываем попап для добавления карточек кликом на крестик
-
 
 formAddElement.addEventListener('submit', addSave);//Сохраняем данные кликом на кнопку "создать"
 

@@ -46,7 +46,6 @@ const showInputError = (formSelector, inputSelector, errorMessage, inputErrorCla
     });
   }
   
-  
   //функция добавляющая кнопке сабмита статус неактивности если хотя бы одно поле не валидно
   function toggleButtonState(inputList, buttonSelector, inactiveButtonClass) {
     if (hasInvalidInput(inputList)) {
@@ -59,7 +58,6 @@ const showInputError = (formSelector, inputSelector, errorMessage, inputErrorCla
     }
   }
   
-  
   const enableValidation = ({formSelector,inputSelector,submitButtonSelector,inactiveButtonClass,inputErrorClass,errorClass}) => {
     const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach((formSelector) => {
@@ -69,18 +67,16 @@ const showInputError = (formSelector, inputSelector, errorMessage, inputErrorCla
       setEventListeners(formSelector,inputSelector,submitButtonSelector,inactiveButtonClass,inputErrorClass,errorClass);
     });
   }; //Вызов функции происходит при навешивании слушателя с кликом на попапы
+
+  enableValidation({
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  });
+
   
   
-  //функция закрывающая попапы по клику на оверлэй
-  function overlayClosePopup(evt) {
-    if (evt.target === evt.currentTarget) {
-      evt.preventDefault();
-      togglePopup(evt.target);
-    }
-  }
-  //вешаю слушатели на все попапы
-      const popupList = Array.from(document.querySelectorAll('.popup'));
-      popupList.forEach((popup) => {
-      popup.addEventListener('click', overlayClosePopup)
-    })
   
