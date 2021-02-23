@@ -29,15 +29,11 @@ function closeByEscape(evt) {
   }
 }
 
-document.addEventListener('keydown', closeByEscape);
-document.removeEventListener('keydown', closeByEscape);
-
 const popups = document.querySelectorAll('.popup');
 
 //устанавливаю обработчики для всех попапов 
 popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
-        overlayClosePopup(evt)
         if (evt.target.classList.contains('popup_opened')) {
             togglePopup(popup)
         }
@@ -46,14 +42,6 @@ popups.forEach((popup) => {
         }
     })
 })
-
-//функция закрывающая попапы по клику на оверлэй
-function overlayClosePopup(evt) {
-  if (evt.target === evt.currentTarget) {
-    evt.preventDefault();
-    togglePopup(evt.target);
-  }
-}
 
 function editClick(popup) {
     nameInput.value = profileTitle.textContent;
