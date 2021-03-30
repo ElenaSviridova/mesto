@@ -1,9 +1,9 @@
 export default class Card {
-    constructor(data, cardSelector, openPictureCallback) {
+    constructor(data, cardSelector, handleCardClick) {
         this._text = data.name;
         this._image = data.link;
         this._cardSelector = cardSelector;
-        this._openPictureCallback = openPictureCallback;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplateCard() {
@@ -34,10 +34,7 @@ export default class Card {
         this._deleteButton.addEventListener('click', () => {
            this._deleteCard()
         })
-        this._imageElement.addEventListener('click', () => {
-          this._openPictureCallback(this._text, this._image);
-            
-        })
+        this._imageElement.addEventListener('click', this._handleCardClick);
       }
 
     _deleteCard() {

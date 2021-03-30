@@ -1,0 +1,19 @@
+{
+  "name": "yandex.praktikum",
+  "version": "0.0.1",
+  "description": "Learning platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\"&&\u001b[D\u001b[D \u001b[C\u001b[C\u001b[D& exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElenaSviridova/mesto.git"
+  },
+  "author": "Elena Sviridova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElenaSviridova/mesto/issues"
+  },
+  "homepage": "https://github.com/ElenaSviridova/mesto#readme"
+}
