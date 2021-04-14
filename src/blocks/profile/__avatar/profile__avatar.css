@@ -1,5 +1,9 @@
 .profile__avatar {
     background-color: black;
+    position:relative;
+    margin: 0 auto;
+    width: 120px;
+    height: 120px;
 }
 
 

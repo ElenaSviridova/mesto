@@ -1,3 +1,3 @@
-  const escapeKey = 'Escape' ;
+  const closeKey = 'Escape' ;
 
-  export default escapeKey;
+  export default closeKey;

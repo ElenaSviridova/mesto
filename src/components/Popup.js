@@ -1,4 +1,4 @@
-import escapeKey from './hot-keys.js'
+import closeKey from './hot-keys.js'
 export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
@@ -17,7 +17,7 @@ export default class Popup {
     }
 
     _handleEscClose(evt) {
-        if (evt.key === escapeKey) {
+        if (evt.key === closeKey) {
             this.close()
         }
     }

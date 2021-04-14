@@ -1,7 +1,8 @@
 export default class UserInfo {
-    constructor({nameSelector, aboutYourselfSelector}) {
+    constructor({nameSelector, aboutYourselfSelector, avatarSelector}) {
         this._title = document.querySelector(nameSelector);
         this._subtitle = document.querySelector(aboutYourselfSelector);
+        this._avatarSelector = document.querySelector(avatarSelector);
     }
 
     getUserInfo() {
@@ -19,5 +20,10 @@ export default class UserInfo {
         this._subtitle.textContent = job;//принимает новые данные и добавляет на страницу
 
     }
+
+    loadImage(imageUrl) {
+          const image = this._avatarSelector;
+          image.src = imageUrl;
+      }
 
 }
