@@ -18,8 +18,6 @@ export default class Card {
         this._likeNumbers = this._element.querySelector('.element__like-numbers');
         this._likeNumbers.textContent = this._likes;
         this._updateLikeView();
-        // if (this._checkLikeId()) {
-        //     this._likeButton.classList.add('element__like_active');}
     }
 
     _getTemplateCard() {
@@ -91,8 +89,5 @@ export default class Card {
         }
         
             }
-            
-        
-    
-    
+               
 }
