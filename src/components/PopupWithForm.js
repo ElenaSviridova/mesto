@@ -22,7 +22,6 @@ export default class PopupWithForm extends Popup{
             evt.preventDefault();
             this._renderLoading(true, this._popupButton);
             this.formSubmitCallback(this._getInputValues());
-            super.close();
         })
 
     }
@@ -31,6 +30,10 @@ export default class PopupWithForm extends Popup{
         super.close();
         this._form = this._popupElement.querySelector('.popup__container');
         this._form.reset();
+    }
+
+    setButtonName(newName) {
+        this._popupButton.textContent = newName;
     }
 
 }

@@ -13,17 +13,12 @@ export default class UserInfo {
     }
 
     setUserInfo({name, job}) {
-    //     const myInputValues = popupProfile._getInputValues();
-    //     profileTitle.textContent= myInputValues.Author;
-    //  profileSubtitle.textContent=myInputValues.Profile;
         this._title.textContent = name;
         this._subtitle.textContent = job;//принимает новые данные и добавляет на страницу
-
     }
 
     loadImage(imageUrl) {
           const image = this._avatarSelector;
           image.src = imageUrl;
-      }
-
+    }
 }

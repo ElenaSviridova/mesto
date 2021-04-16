@@ -11,13 +11,17 @@ export default class Card {
         this._deleteSubmitCard = deleteSubmitCard;
         this._toggleLike = toggleLike;
         this._removeLike = removeLike;
-        
+        this._cardId = data._id;
     }
     
     _setLike() {
         this._likeNumbers = this._element.querySelector('.element__like-numbers');
-        this._likeNumbers.textContent = this._likes;
+        this._setLikesCount(this._likes);
         this._updateLikeView();
+    }
+
+    _setLikesCount(likesCount) {
+        this._likeNumbers.textContent = likesCount;
     }
 
     _getTemplateCard() {
@@ -68,11 +72,12 @@ export default class Card {
     
     deleteCard() {
             this._element.remove();
+            this._element = null;
     }
-    
+
     handleLikes(data) {
         this._myLike = data.likes;
-        this._likeNumbers.textContent = data.likes.length;
+        this._setLikesCount(this._myLike.length);
         this._updateLikeView();
     }
       

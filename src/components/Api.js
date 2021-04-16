@@ -4,21 +4,20 @@ export default class Api {
         this._token = token;
     }
 
+    _getResponseData(response) {
+        if (response.ok) {
+            return response.json();
+        }
+        return Promise.reject(new Error(`Ошибка ${response.status}`))
+    }
+
     getProfileInfo() {
         return fetch(`${this._adress}/users/me`, {
             headers: {
                 authorization: this._token
             }
-        }).then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            return Promise.reject(`Ошибка ${response.status}`)
-        })
-          .then((data) => {
-            return data
-          })  
-        }
+        }).then(this._getResponseData)
+    }
 
     changeProfileInfo(profileName, profileAbout) {
         return fetch(`${this._adress}/users/me`, {
@@ -32,9 +31,7 @@ export default class Api {
               about: profileAbout
             })
         })
-        .then(response => response.ok
-            ? console.log(response.json())
-            : Promise.reject(`Ошибка${response.status}`))
+        .then(this._getResponseData)
     }
 
     getInitialCards() {
@@ -42,12 +39,7 @@ export default class Api {
             headers: {
                 authorization: this._token
             }
-        }).then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            return Promise.reject(`Ошибка ${response.status}`)
-        })
+        }).then(this._getResponseData)
     }
 
     addCards(data) {
@@ -62,9 +54,7 @@ export default class Api {
                 link: data.link
             })
         })
-        .then(response => response.ok
-            ? response.json()
-            : Promise.reject(`Ошибка${response.status}`))
+        .then(this._getResponseData)
     }
 
     removeCards(id) {
@@ -74,9 +64,7 @@ export default class Api {
                 authorization: this._token
             }
         })
-        .then(response => response.ok
-            ? response.json()
-            : Promise.reject(`Ошибка${response.status}`))  
+        .then(this._getResponseData)  
     }
 
     setLike(cardId) {
@@ -86,9 +74,7 @@ export default class Api {
                 authorization:this._token,
             }
         })    
-        .then(response => response.ok
-            ? response.json()
-            : Promise.reject(`Ошибка${response.status}`))
+        .then(this._getResponseData)
     }
 
     deleteLike(cardId) {
@@ -98,9 +84,7 @@ export default class Api {
                 authorization:this._token
             }
         })
-        .then(response => response.ok
-            ? response.json()
-            : Promise.reject(`Ошибка${response.status}`))
+        .then(this._getResponseData)
     }
 
     updateAvatar(avatarLink) {
@@ -114,11 +98,6 @@ export default class Api {
               avatar: avatarLink
             })
         })
-        .then(response => response.ok
-            ? response.json()
-            : Promise.reject(`Ошибка${response.status}`))
+        .then(this._getResponseData)
     }
 }
-
-//создать класс
-//вызвать метод с 

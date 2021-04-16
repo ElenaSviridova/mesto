@@ -32,9 +32,13 @@ module.exports = {
           },
           // добавили правило для обработки файлов
           {
-            // регулярное выражение, которое ищет все файлы с такими расширениями
-            test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
-            type: 'asset/resource'
+            test: /\.(png|svg|jpg|jpeg|gif)$/, type: 'asset/resource', generator: {
+              filename: 'images/[name].[contenthash][ext]',
+            }
+          }, {
+            test: /\.(woff|woff2|eot|ttf|otf)$/i, type: 'asset/resource', generator: {
+              filename: 'vendor/[name].[contenthash][ext]',
+            }
           },
           {
             // применять это правило только к CSS-файлам

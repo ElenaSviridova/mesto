@@ -16,25 +16,24 @@ import Popup from '../components/Popup.js'
 
 import Api from '../components/Api.js'
 
+import renderLoading from '../utils/utils.js'
+
 
 const elements = document.querySelector('.elements');
 const formPopup = document.querySelector('.popup_edit');
-const saveEditButton = formPopup.querySelector('.popup__button')
 const profileInfo = document.querySelector('.profile__info');
 const profileTitle = profileInfo.querySelector('.profile__title');
 const profileSubtitle = profileInfo.querySelector('.profile__subtitle');
-const profileAvatar = document.querySelector('.profile__avatar-image');
 const profileAvatarIcon = document.querySelector('.profile__avatar-hover');
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');
 const formElement = formPopup.querySelector('.popup__container');
 const nameInput = formElement.querySelector('.popup__input_text_name');
 const jobInput = formElement.querySelector('.popup__input_text_about-yourself');
 const formAvatar = document.querySelector('.popup_avatar');
-const formDelete = document.querySelector('.popup_delete-card');
-const deletePopupButton = formDelete.querySelector('.popup__button');
 const formPopupAdd = document.querySelector('.popup_add');
 const profileAddButton = document.querySelector('.profile__add-button');
 const formAddElement = formPopupAdd.querySelector('.popup__container');
+const formDelete = document.querySelector('.popup_delete-card');
 
 const validationConfig = {
   inputElement: '.popup__input',
@@ -56,49 +55,46 @@ const avatarFormValidator = new FormValidator(validationConfig, formAvatar);
 
 avatarFormValidator.enableValidation();
 
-function renderLoading(isLoading, button) {
-  if (isLoading) {
-    button.textContent = 'Сохранение...';
-  }
-}
+const deleteYesButton = formDelete.querySelector('.popup__button');
 
-function createCard(item) {
-  const card = new Card(item, '.el-template', () => {
-    popupOpenImage.open(item.name,item.link)}, myUserObjToTest, (evt) => {
-      popupDelete.open();
-      evt.preventDefault();
-      console.log(item)
-      api.removeCards(item._id)//отправляем запрос удаления на сервер
-      .then((res) => {
-        console.log(res);
-        card.deleteCard();
-        popupDelete.close();
-        })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
-    }, () => {
-      api.setLike(item._id)//запрос при постановке лайка
-      .then((res) => {
-        console.log('our array on set:', res)
-        card.handleLikes(res);
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
-    }, () => {
-      api.deleteLike(item._id)//запрос при удалении лака
-      .then((res) => {
-        console.log('our array on del:', res)
 
-        card.handleLikes(res);
-      })
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
-    });
-  return card
-}
+function createCard(item) { 
+  const card = new Card(item, '.el-template', () => { 
+    popupOpenImage.open(item.name,item.link)}, myUserObjToTest, (evt) => { 
+      popupDelete.open(); 
+      evt.preventDefault(); 
+      console.log(item) 
+      api.removeCards(item._id)//отправляем запрос удаления на сервер 
+      .then((res) => { 
+        console.log(res); 
+       card.deleteCard(); 
+        popupDelete.close(); 
+        }) 
+      .catch((err) => { 
+        console.log(err); // выведем ошибку в консоль 
+      }); 
+    }, () => { 
+      api.setLike(item._id)//запрос при постановке лайка 
+      .then((res) => { 
+        console.log('our array on set:', res) 
+        card.handleLikes(res); 
+      }) 
+      .catch((err) => { 
+        console.log(err); // выведем ошибку в консоль 
+      }); 
+    }, () => { 
+      api.deleteLike(item._id)//запрос при удалении лака 
+      .then((res) => { 
+        console.log('our array on del:', res) 
+ 
+        card.handleLikes(res); 
+      }) 
+      .catch((err) => { 
+        console.log(err); // выведем ошибку в консоль 
+      }); 
+    }); 
+  return card 
+} 
 
 
 const popupDelete = new Popup ('.popup_delete-card');
@@ -114,34 +110,40 @@ const api = new Api({adress:'https://mesto.nomoreparties.co/v1/cohort-22', token
 
 let myUserObjToTest
 
+let cardList
+
 Promise.all([api.getInitialCards(), api.getProfileInfo()])
 .then(([cards, userData]) => {
   myUserObjToTest = userData._id;//сохраняю в переменную мой id
   ourUser.loadImage(userData.avatar);//выгружаю и вставляю картинку профиля
-  profileTitle.textContent = userData.name;//выгружаю и вставляю имя профиля
-  profileSubtitle.textContent = userData.about; //выгружаю и вставляю описание профиля
-  const cardList = new Section({items: cards, renderer: (item) => { 
-    createCard(item);
+  ourUser.setUserInfo({name: userData.name, job: userData.about})//выгружаю и вставляю имя и описание профиля
+  cardList = new Section({items: cards, renderer: (item) => { 
     const card = createCard(item);
     const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
+    cardList.addItem(cardElement, true);
   }}, '.elements')
-  
   cardList.renderItems()
-  
 })
-
 .catch((err) => {
   console.log(err); // выведем ошибку в консоль
 });
 
 //создаем класс для попапа с информацией о пользователе
 const popupProfile = new PopupWithForm({popupSelector:'.popup_edit', formSubmitCallback: (values) => {
-    ourUser.setUserInfo({name:values.Author, job: values.Profile}) //принимает новые данные и добавляет на страницу
     api.changeProfileInfo(values.Author, values.Profile)
+    .then(() => {
+      ourUser.setUserInfo({name:values.Author, job: values.Profile}) //принимает новые данные и добавляет на страницу
+    })
+    .then(() => {
+      popupProfile.close();
+      
+    })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
-    });
+    })
+    .finally(() => {
+      popupProfile.setButtonName('Сохранить');
+    })
   }, renderLoading
 });
 popupProfile.setEventListeners();
@@ -155,23 +157,27 @@ profileEditButton.addEventListener('click', () => {
    });
 
 //создаем класс для попапа добавления карточки
-const popupAddCard = new PopupWithForm({popupSelector:'.popup_add', formSubmitCallback: () => {
-  const addInputValues = popupAddCard._getInputValues();//возвращает объект с данными всех полей формы
+const popupAddCard = new PopupWithForm({popupSelector:'.popup_add', formSubmitCallback: (data) => {
   const newCardDataSet = {
-    name: addInputValues.Name,
-    link: addInputValues.Link
+    name: data.Name,
+    link: data.Link
   }
   api.addCards(newCardDataSet)
   .then((newCard) => {
-    createCard(newCard);
     const card = createCard(newCard);
     const cardElement = card.generateCard();
-    elements.prepend(cardElement);
+    cardList.addItem(cardElement, false);
+    popupAddCard.close();
+  })
+  .then(() => {
     popupAddCard.close();
   })
   .catch((err) => {
     console.log(err); // выведем ошибку в консоль
-  });
+  })
+  .finally(() => {
+    popupAddCard.setButtonName('Сохранить');
+  })
 }, renderLoading
 });   
 popupAddCard.setEventListeners();
@@ -183,14 +189,18 @@ profileAddButton.addEventListener('click', () => {
 
 //создаем класс для попапа обновления аватара
 const popupAvatar = new PopupWithForm({popupSelector:'.popup_avatar', formSubmitCallback: (values) => {
+  
   api.updateAvatar(values.Link)
   .then((res) => {
     ourUser.loadImage(res.avatar)
     popupAvatar.close();
   })
-  .catch(() => {
-    console.error('Всё идёт не по плану.');
-  });
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    popupAvatar.setButtonName('Сохранить');
+  })
 }, renderLoading})
 popupAvatar.setEventListeners();
 
