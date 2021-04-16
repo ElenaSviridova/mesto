@@ -12,18 +12,16 @@ import PopupWithImage from '../components/PopupWithImage.js'
 
 import UserInfo from '../components/UserInfo.js'
 
-import Popup from '../components/Popup.js'
-
 import Api from '../components/Api.js'
 
 import renderLoading from '../utils/utils.js'
 
+import PopupDelete from '../components/PopupDelete.js'
 
-const elements = document.querySelector('.elements');
+
+
 const formPopup = document.querySelector('.popup_edit');
 const profileInfo = document.querySelector('.profile__info');
-const profileTitle = profileInfo.querySelector('.profile__title');
-const profileSubtitle = profileInfo.querySelector('.profile__subtitle');
 const profileAvatarIcon = document.querySelector('.profile__avatar-hover');
 const profileEditButton = profileInfo.querySelector('.profile__edit-button');
 const formElement = formPopup.querySelector('.popup__container');
@@ -33,7 +31,6 @@ const formAvatar = document.querySelector('.popup_avatar');
 const formPopupAdd = document.querySelector('.popup_add');
 const profileAddButton = document.querySelector('.profile__add-button');
 const formAddElement = formPopupAdd.querySelector('.popup__container');
-const formDelete = document.querySelector('.popup_delete-card');
 
 const validationConfig = {
   inputElement: '.popup__input',
@@ -55,28 +52,25 @@ const avatarFormValidator = new FormValidator(validationConfig, formAvatar);
 
 avatarFormValidator.enableValidation();
 
-const deleteYesButton = formDelete.querySelector('.popup__button');
-
 
 function createCard(item) { 
   const card = new Card(item, '.el-template', () => { 
-    popupOpenImage.open(item.name,item.link)}, myUserObjToTest, (evt) => { 
+    popupOpenImage.open(item.name,item.link)}, myUserObjToTest, () => { 
       popupDelete.open(); 
-      evt.preventDefault(); 
-      console.log(item) 
-      api.removeCards(item._id)//отправляем запрос удаления на сервер 
-      .then((res) => { 
-        console.log(res); 
-       card.deleteCard(); 
-        popupDelete.close(); 
+      popupDelete.setSubmitAction(() => {
+        api.removeCards(item._id)//отправляем запрос удаления на сервер 
+        .then(() => {
+          card.deleteCard(); 
+          popupDelete.close(); 
+          }) 
+        .catch((err) => { 
+          console.log(err); // выведем ошибку в консоль 
         }) 
-      .catch((err) => { 
-        console.log(err); // выведем ошибку в консоль 
       }); 
+      
     }, () => { 
       api.setLike(item._id)//запрос при постановке лайка 
-      .then((res) => { 
-        console.log('our array on set:', res) 
+      .then((res) => {  
         card.handleLikes(res); 
       }) 
       .catch((err) => { 
@@ -85,8 +79,6 @@ function createCard(item) {
     }, () => { 
       api.deleteLike(item._id)//запрос при удалении лака 
       .then((res) => { 
-        console.log('our array on del:', res) 
- 
         card.handleLikes(res); 
       }) 
       .catch((err) => { 
@@ -97,7 +89,16 @@ function createCard(item) {
 } 
 
 
-const popupDelete = new Popup ('.popup_delete-card');
+const popupDelete = new PopupDelete ({popupSelector:'.popup_delete-card', handleSubmitCallback: (item) => {
+  api.removeCards(item._id)//отправляем запрос удаления на сервер 
+  .then(() => {
+    card.deleteCard(); 
+    popupDelete.close(); 
+    }) 
+  .catch((err) => { 
+    console.log(err); // выведем ошибку в консоль 
+  }) 
+}});
 popupDelete.setEventListeners();
 
 const popupOpenImage = new PopupWithImage({popupSelector:'.popup_image'});

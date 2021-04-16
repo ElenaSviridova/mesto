@@ -65,7 +65,8 @@ export default class Card {
                this._toggleLike();
            } 
         });      
-        this._deleteButton.addEventListener('click', this._deleteSubmitCard);
+        this._deleteButton.addEventListener('click', () => {
+            this._deleteSubmitCard(this._cardId)});
         this._imageElement.addEventListener('click', this._handleCardClick);
       } 
 
